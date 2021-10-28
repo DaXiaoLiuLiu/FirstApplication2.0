@@ -18,9 +18,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceCreator<T> {
     private static final String BASE_URL ="http://47.107.82.195:9999" ;
+    //private static final String BASE_URL ="http://47.107.82.195:9999" ;
+    private static final String BASE_URL_L ="http://47.107.82.195:8080" ;
 
     private static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(initHttpClient())
+            .build();
+
+    private static final Retrofit retrofit_l = new Retrofit.Builder()
+            .baseUrl(BASE_URL_L)
             .addConverterFactory(GsonConverterFactory.create())
             .client(initHttpClient())
             .build();
@@ -30,6 +38,10 @@ public class ServiceCreator<T> {
         return service;
     }
 
+    public  T ServiceCreate_L(Class<T> ServiceClass){
+        T service = retrofit_l.create(ServiceClass);
+        return service;
+    }
 
     //打印网络请求日志
     private static OkHttpClient initHttpClient() {

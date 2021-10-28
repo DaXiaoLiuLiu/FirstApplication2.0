@@ -1,4 +1,10 @@
 package com.example.myapplication1.network.back;
+/*
+ * @Author Lxf
+ * @Date 2021/8/10 20:15
+ * @Description 用于实现手机震动功能
+ * @Since version-1.0
+ */
 
 import android.app.Notification;
 import android.app.NotificationChannel;

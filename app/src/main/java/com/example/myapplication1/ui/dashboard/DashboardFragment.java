@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -18,6 +20,8 @@ import com.example.myapplication1.R;
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
+    private TextView title_View;
+    private Toolbar toolbar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +35,13 @@ public class DashboardFragment extends Fragment {
                 textView.setText(s);
             }
         });*/
+        title_View = getActivity().findViewById(R.id.toolbar_title);
+        title_View.setText("视频连接");
+        title_View.setTextColor(getResources().getColor(R.color.black));
+        toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        toolbar.setBackgroundColor(getResources().getColor(R.color.color_223F51B5));
+
 
         Button button = (Button) root.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {

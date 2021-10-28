@@ -15,8 +15,8 @@ import com.example.myapplication1.network.home.ValueNetWork;
 import com.example.myapplication1.network.home.ValueResponse;
 
 public class Repository {
-    private static ValueResponse vResult = new ValueResponse();
-    private static MutableLiveData<ValueResponse> vDataResult
+    private static volatile ValueResponse vResult;
+    private static volatile MutableLiveData<ValueResponse> vDataResult
             = new MutableLiveData<>();
     
     

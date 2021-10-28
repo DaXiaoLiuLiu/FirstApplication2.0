@@ -10,9 +10,6 @@ import com.example.myapplication1.network.home.ValueResponse;
 public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
-    private static LiveData<ValueResponse> responseMutableLiveData
-            = new MutableLiveData<>();
-    //private  MutableLiveData resultData = Transformations
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
@@ -20,7 +17,7 @@ public class HomeViewModel extends ViewModel {
     }
     private  LiveData resultData = Repository.getValueData();
 
-    public LiveData<ValueResponse> getValue(){
+    public LiveData<ValueResponse> getValue(){//提供livedata
 
             return Repository.getValueData();
     }

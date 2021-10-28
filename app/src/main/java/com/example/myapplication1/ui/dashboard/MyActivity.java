@@ -57,6 +57,6 @@ public class MyActivity extends AppCompatActivity {
 
         webview.setWebChromeClient(new WebChromeClient());
        // webview.loadUrl("http://192.168.1.101:8081/");
-        webview.loadUrl("http://124.71.174.121:8081/");
+        webview.loadUrl("http://47.107.82.195:8081/");
     }
 }

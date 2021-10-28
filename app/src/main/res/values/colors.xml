@@ -4,9 +4,23 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="teal_700">#04BE02</color>
     <color name="black">#FF000000</color>
+    <color name="colorBlack">#000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="color_safe">#33FF33</color>
+    <color name="color_safe">#009933</color>
+    <color name="background_login">#223F51B5</color>
     <color name="color_danger"></color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_eeeeee">#eeeeee</color>
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_c61a04">#c61a04</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_d81e06">#d81e06</color>
+    <color name="color_b0b8b2">#b0b8b2</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_223F51B5">#eeeeee</color>
+    <color name="color_883F51B5">#883F51B5</color>
+    <color name="gray_line_color">#e5e5e5</color>
 </resources>

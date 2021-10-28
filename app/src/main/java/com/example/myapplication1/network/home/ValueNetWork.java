@@ -31,7 +31,7 @@ public class  ValueNetWork {
                 NetWorkResult = response.body();
             }
             else {
-                NetWorkResult = new ValueResponse();
+                NetWorkResult = null;
                 Log.d("ValueNetWork","response is null");
             }
 
