@@ -39,7 +39,7 @@ public class MyActivity extends AppCompatActivity {
     private void load() {
         WebSettings webviewSettings = webview.getSettings();
         webviewSettings.setJavaScriptEnabled(true);
-        webviewSettings.setJavaScriptEnabled(true);
+
         webviewSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webviewSettings.setAllowFileAccess(true);// 设置允许访问文件数据
         webviewSettings.setSupportZoom(true);

@@ -7,11 +7,10 @@
     tools:context=".ui.notifications.NotificationsFragment"
     android:fitsSystemWindows="true">
 
-
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="43dp"
         android:layout_marginLeft="43dp"
         android:layout_marginTop="100dp"
@@ -22,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
+
 
     <LinearLayout
         android:id="@+id/line1"
@@ -65,7 +65,8 @@
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
-            android:layout_height="35dp" />
+            android:layout_height="35dp"
+            android:src="@drawable/account"/>
 
         <TextView
             android:id="@+id/textView3"
@@ -92,7 +93,8 @@
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
-            android:layout_height="35dp" />
+            android:layout_height="35dp"
+            android:src="@drawable/change"/>
 
         <TextView
             android:id="@+id/textView5"

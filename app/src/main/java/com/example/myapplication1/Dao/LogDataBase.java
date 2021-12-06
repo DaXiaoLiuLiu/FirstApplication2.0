@@ -13,7 +13,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {DLog.class},version = 1)
+@Database(entities = {DLog.class},version = 1,exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class LogDataBase extends RoomDatabase {
 

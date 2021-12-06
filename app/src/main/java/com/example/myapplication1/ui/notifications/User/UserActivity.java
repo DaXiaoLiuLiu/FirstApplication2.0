@@ -16,6 +16,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;*/
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -55,6 +59,28 @@ public class UserActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     public static final int CHOOSE_USER_PROFILE = 12;
+
+/*    private ActivityResultLauncher requestDataLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                        Uri uri = result.getData().getData();
+                        if (uri != null) {
+                            userAvatar = findViewById(R.id.user_avatar);
+                            GlideHelper helper = new GlideHelper(getApplicationContext());
+
+                            String uri_s = uri.toString();
+                            helper.setGilde(uri_s, userAvatar);
+                            Log.d("UserActivity", "url is " + uri_s);
+                            MMKV.defaultMMKV().encode("Url", uri_s);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "图片选择错误", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +122,8 @@ public class UserActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress);
 
         String userId = MMKV.defaultMMKV().decodeString("name","");
-        initData(userId);
-        if(progressBar.getVisibility() == View.VISIBLE) progressBar.setVisibility(View.GONE);
+        initData(userId);//初始化用户信息
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +156,7 @@ public class UserActivity extends AppCompatActivity {
                             Toast.makeText(UserActivity.this,"保存成功",Toast.LENGTH_LONG).show();
                         }
                         else{//设置失败
-                            Log.d("UserDetailActivity"," fail in create: " + response.getMessage());
+                            Log.d("UserDetailActivity"," failed in create: " + response.getMessage());
                             Toast.makeText(UserActivity.this,"保存失败",Toast.LENGTH_LONG).show();
                         }
 
@@ -171,6 +197,7 @@ public class UserActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("image/*");
+                //requestDataLauncher.launch(intent);
                 startActivityForResult(intent,CHOOSE_USER_PROFILE);
 
             }
@@ -349,6 +376,7 @@ public class UserActivity extends AppCompatActivity {
 
                         String uri_s = uri.toString();
                         helper.setGilde(uri_s,userAvatar);
+                        Log.d("UserActivity","url is " + uri_s);
                         MMKV.defaultMMKV().encode("Url",uri_s);
                     }
                     else {
@@ -361,7 +389,7 @@ public class UserActivity extends AppCompatActivity {
     // 初始化数据
     private void initData(String userId) {
 
-        new Thread(new Runnable() {
+        ThreadPool.getExecutor().execute (new Runnable() {
             @Override
             public void run() {
 
@@ -383,17 +411,27 @@ public class UserActivity extends AppCompatActivity {
                     Log.d("UserDetailActivity",response.getMessage());
                 }
 
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showNickName.setText(MMKV.defaultMMKV().decodeString("NickName","未设置"));
+                        showSex.setText(MMKV.defaultMMKV().decodeString("Sex","未设置"));
+                        showLocation.setText(MMKV.defaultMMKV().decodeString("Location","未设置"));
+                        showSignature.setText(MMKV.defaultMMKV().decodeString("Signature","未设置"));
+                        String curImagePath = MMKV.defaultMMKV().decodeString("Url","");
+                        helper = new GlideHelper(getApplicationContext());
+                        helper.setGilde(curImagePath,userAvatar);
+                        if(progressBar.getVisibility() == View.VISIBLE) progressBar.setVisibility(View.GONE);
+                    }
+                });
+
             }
-        }).start();
+        });
 
 
-        showNickName.setText(MMKV.defaultMMKV().decodeString("NickName","未设置"));
-        showSex.setText(MMKV.defaultMMKV().decodeString("Sex","未设置"));
-        showLocation.setText(MMKV.defaultMMKV().decodeString("Location","未设置"));
-        showSignature.setText(MMKV.defaultMMKV().decodeString("Signature","未设置"));
-        String curImagePath = MMKV.defaultMMKV().decodeString("Url","");
-        helper = new GlideHelper(getApplicationContext());
-        helper.setGilde(curImagePath,userAvatar);
-        //diplayImage(curImagePath);
+
+
     }
+
+
 }

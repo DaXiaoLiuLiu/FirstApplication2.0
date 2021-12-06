@@ -40,7 +40,7 @@ public class HistoryFragment extends Fragment {
     private List<DLog> myList = new ArrayList<>();
 
 
-    private Handler handler = new Handler(Looper.myLooper()){
+    private  Handler handler = new Handler(Looper.myLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
             if(msg.what > 0){

@@ -26,12 +26,13 @@ public class Repository {
         if(valueResponse != null){
             vResult = valueResponse;
             Log.d("Repository","tmp is " + vResult.getTemperatureStatus() );
+           // vResult.
             vDataResult.postValue(valueResponse);
             return true;
         }
         else {
             //测试用
-            Log.d("Repository","tmp is " + vResult.getTemperatureStatus() );
+            //Log.d("Repository","tmp is " + vResult.getTemperatureStatus() );
             return false;
         }
 

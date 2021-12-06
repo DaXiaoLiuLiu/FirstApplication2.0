@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.myapplication1.network.back.DataService;
 import com.example.myapplication1.network.home.ValueHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.tencent.mmkv.MMKV;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,12 +27,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        MMKV.initialize(this);
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
         //启动服务
         Intent startIntent = new Intent(this, DataService.class);
         startService(startIntent);

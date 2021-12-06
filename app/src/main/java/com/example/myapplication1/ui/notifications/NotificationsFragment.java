@@ -2,6 +2,7 @@ package com.example.myapplication1.ui.notifications;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class NotificationsFragment extends Fragment {
     private TextView title_View;
     private Toolbar toolbar;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
@@ -53,22 +55,6 @@ public class NotificationsFragment extends Fragment {
             }
         });*/
 
-        String userId = MMKV.defaultMMKV().decodeString("name","");
-        if(userId.length() == 0){
-            imageView.setImageResource(R.drawable.load);
-        }
-        else {
-            String imageUrl = MMKV.defaultMMKV().decodeString("Url","");
-            if(imageUrl.length() == 0){
-                imageView.setImageResource(R.drawable.load);
-            }
-            else {
-                //昵称初始化失败的话，默认使用账户id代替
-                textView_Nick.setText(MMKV.defaultMMKV().decodeString("NickName",userId));
-                GlideHelper helper = new GlideHelper(getContext());
-                helper.setGilde(imageUrl,imageView);
-            }
-        }
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -117,5 +103,33 @@ public class NotificationsFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("NotificationFragment","onStart 执行");
+        ImageView imageView = (ImageView) getActivity().findViewById(R.id.imageView);
+        TextView textView_Nick =getActivity().findViewById(R.id.textView4);
+
+        String userId = MMKV.defaultMMKV().decodeString("name","");
+        if(userId.length() == 0){
+            imageView.setImageResource(R.drawable.load);
+            Log.d("NotificationFragment","用户id为0，设置默认图片");
+        }
+        else {
+            String imageUrl = MMKV.defaultMMKV().decodeString("Url","");
+            Log.d("NotificationFragment","url is " + imageUrl);
+            if(imageUrl.length() == 0){
+                imageView.setImageResource(R.drawable.load);
+                Log.d("NotificationFragment","图片url为0");
+            }
+            else {
+                //昵称初始化失败的话，默认使用账户id代替
+                textView_Nick.setText(MMKV.defaultMMKV().decodeString("NickName",userId));
+                GlideHelper helper = new GlideHelper(getContext());
+                helper.setGilde(imageUrl,imageView);
+            }
+        }
     }
 }

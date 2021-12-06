@@ -35,7 +35,8 @@ import static java.lang.Thread.sleep;
 
 public class DataService extends Service {
 
-    private Boolean ring  = true;//用于指示发出危险报警
+    private static  Boolean ring  = true;//用于指示发出危险报警
+    private static volatile Boolean is_ring  = true;//用于指示发出危险报警
 
     public DataService() {
     }
@@ -77,14 +78,14 @@ public class DataService extends Service {
             @Override
             public void run() {
 
-                while (true) {
+                while (is_ring) {
                     try {
                         sleep(2000);//2秒钟发出一个网络请求,以更新数据
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
-                    if(Repository.setValue()){//成功接收值的情况
+                    //Repository.setValue()
+                    if(false){//成功接收值的情况
                         Log.d("DataService","服务正在更新 ");
                         //通过仓库类，获取网络返回值
 
@@ -99,6 +100,7 @@ public class DataService extends Service {
                         tmp = valueResponse.getTemperatureStatus();
                         smoke = valueResponse.getSmokeStatus();
                         status = valueResponse.getViewStatus();
+
 
                         if (status == 0 || smoke == 0 || tmp > 40 || tmp < 0) {
                             if (ring) {//危险的情况，手机需要发出震动，但只震动一次
@@ -134,7 +136,9 @@ public class DataService extends Service {
 
     @Override
     public void onDestroy() {
+
         super.onDestroy();
+        is_ring = false;
     }
 
 }

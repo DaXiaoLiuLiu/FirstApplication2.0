@@ -31,7 +31,8 @@ public class VibratorHelper {
     }
 
    public static void Warning(Service service){
-       NotificationManager manager = (NotificationManager) service.getSystemService(Context.NOTIFICATION_SERVICE);
+       NotificationManager manager = (NotificationManager)
+               service.getSystemService(Context.NOTIFICATION_SERVICE);
 
        NotificationChannel channel = null;
        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -42,13 +43,13 @@ public class VibratorHelper {
        Intent intent = new Intent(service, MainActivity.class);
        PendingIntent pi = PendingIntent.getActivity(MyApplication.getContext(),0,intent,0);
 
-       Notification notification = new NotificationCompat.Builder(MyApplication.getContext(),"DataService")
+       Notification notification = new NotificationCompat.Builder(MyApplication.getContext(),"Warning")
                .setContentTitle("智能安全监护系统")
                .setContentText("发现一处危险")
                .setSmallIcon(R.drawable.small_icon)
                .setLargeIcon(BitmapFactory.decodeResource(service.getResources(),R.drawable.large_icon))
                .setContentIntent(pi)
                .build();
-       manager.notify(1,notification);
+       manager.notify(2,notification);
    }
 }

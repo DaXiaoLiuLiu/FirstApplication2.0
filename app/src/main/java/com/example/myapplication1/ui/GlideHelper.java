@@ -21,6 +21,7 @@ public class GlideHelper {
     }
 
     public void setGilde(String url, ImageView imageView){//设置的是默认缓存策略
+
         Glide.with(context)
                 .load(url)
                 .placeholder(DEFAULT_IMAGE)
